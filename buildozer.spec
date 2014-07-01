@@ -32,7 +32,7 @@ source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
 # (list) Application requirements
-requirements = kivy,pygame
+requirements = kivy,Pygame
 
 # (list) Garden requirements
 #garden_requirements =
@@ -55,7 +55,7 @@ fullscreen = 0
 #
 
 # (list) Permissions
-#android.permissions = INTERNET
+android.permissions = INTERNET
 
 # (int) Android API to use
 android.api = 14
