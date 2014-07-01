@@ -4,7 +4,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.properties import ObjectProperty
 from kivy import platform
-from kivy.uix.modalview import ModalView
+import os
+
 if platform == "android":
     import android.mixer as mixer
 else:
@@ -41,8 +42,9 @@ class AudioModule(Sound):
 
 
 class Loader(BoxLayout):
-    load = ObjectProperty(None)
-    cancel = ObjectProperty(None)
+        load = ObjectProperty(None)
+        cancel = ObjectProperty(None)
+
 
 class Main(BoxLayout):
     song_title = ObjectProperty()
