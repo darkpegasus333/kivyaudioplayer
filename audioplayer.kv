@@ -1,30 +1,52 @@
 #: import os os
 
 <Loader>:
+    orientation: "vertical"
     file_view: file_view
-    auto_dismiss: False
     title: "Choose a File"
     FileChooserListView:
-    	id: file_view
-    	rootpath: os.path.expanduser("~")
-    	on_submit: root.load(self.selection)
+        id: file_view
+        rootpath: os.path.expanduser("~")
+        on_submit: root.load(self.selection)
+    BoxLayout:
+        size_hint_y: None
+        height: "50dp"
+        Button:
+            text: "Cancel"
+            on_press: root.cancel()
+        Button:
+            text: "Load"
+            on_press: root.load(file_view.selection)
+
+<ControlButton@ActionButton>:
+    source: None
+
+    Image:
+        source: root.source
+        pos: root.pos
+        size: root.size
 
 <Main>:
     play_button: play_button
     song_title: song_title
     orientation: 'vertical'
     Label:
-    	id: song_title
-    	text: "Choose a file"
-    BoxLayout:
-    	Button:
-    	    text: "Load"
-    	    on_press: root.show_popup()
-        Button:
-            text: "Pause"
-            on_press: root._pause()
-    	Button:
-            id:play_button
-    	    text: "Play"
-            on_press: root._play()
+        id: song_title
+        text: "Choose a file"
+    ActionBar:
+        pos_hint: {"bottom":1}
+        ActionView:
+            ActionPrevious:
+                title: "AudioPlayer"
+                with_previous: False
+            ControlButton:
+                source: "load.png"
+                on_press: root.show_popup()
+            ControlButton:
+                source: "pause.png"
+                on_press: root._pause()
+            ControlButton:
+                source: "play.png"
+                id: play_button
+                on_press: root._play()
 

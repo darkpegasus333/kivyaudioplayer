@@ -3,9 +3,12 @@ from kivy.core.audio import Sound,SoundLoader
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.properties import ObjectProperty
-from pygame import mixer
-from kivy.clock import Clock
-import itertools
+from kivy import platform
+from kivy.uix.modalview import ModalView
+if platform == "android":
+    import android_mixer as mixer
+else:
+    from pygame import mixer
 
 class AudioModule(Sound):
     def __init__(self):
@@ -36,10 +39,10 @@ class AudioModule(Sound):
         else:
             return False
 
-SoundLoader.register(AudioModule)
 
-class Loader(Popup):
-    load = ObjectProperty()
+class Loader(BoxLayout):
+    load = ObjectProperty(None)
+    cancel = ObjectProperty(None)
 
 class Main(BoxLayout):
     song_title = ObjectProperty()
@@ -49,9 +52,12 @@ class Main(BoxLayout):
         self.sound = AudioModule()
 
     def show_popup(self):
-        content = Loader(load=self.load_sound)
+        content = Loader(load=self.load_sound, cancel=self.dismiss_popup)
         self.p = Popup(title="Choose a File",content=content)
         self.p.open()
+
+    def dismiss_popup(self):
+        self.p.dismiss()
 
     def load_sound(self,audio):
         self.sound.load(audio[0])
@@ -65,8 +71,10 @@ class Main(BoxLayout):
     def _pause(self):
         self.sound.pause()
 
+
 class AudioPlayer(App):
     def build(self):
+        SoundLoader.register(AudioModule)
         return Main()
 
 if __name__ == '__main__':
