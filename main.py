@@ -65,7 +65,7 @@ class Main(BoxLayout):
         self.sound.load(audio[0])
         self.song_title.text = str(audio[0])
         self.p.dismiss()
-        self._play()
+        #self._play()
 
     def _play(self):
         self.sound.play()
