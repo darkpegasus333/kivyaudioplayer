@@ -6,7 +6,7 @@ from kivy.properties import ObjectProperty
 from kivy import platform
 from kivy.uix.modalview import ModalView
 if platform == "android":
-    import android_mixer as mixer
+    import android.mixer as mixer
 else:
     from pygame import mixer
 

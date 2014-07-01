@@ -32,7 +32,7 @@ source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
 # (list) Application requirements
-requirements = kivy,Pygame
+requirements = kivy
 
 # (list) Garden requirements
 #garden_requirements =
